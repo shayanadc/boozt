@@ -27,7 +27,7 @@ services:
       - ./docker/mysql-config.cnf:/etc/mysql/conf.d/config.cnf
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: php_mvc
+      MYSQL_DATABASE: boozt
       MYSQL_USER: php_mvc
       MYSQL_PASSWORD: php_mvc
 
