@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  app:
+    build: ./docker
+    image: boozt
+    ports:
+      - "8082:80"
+    volumes:
+      - ./:/var/www
+    env_file:
+      - .env
+  ui:
+    build: ./front/
+    ports:
+    - "3000:3000"
+    volumes:
+      - ./front:/app
+      - ./app/node_modules
+
+  db:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql-config.cnf:/etc/mysql/conf.d/config.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: php_mvc
+      MYSQL_USER: php_mvc
+      MYSQL_PASSWORD: php_mvc
+
+volumes:
+  mysql-data:
