@@ -1,8 +1,15 @@
 <?php
 namespace App\Controllers;
 
+use App\Application;
+use App\Response;
+
 abstract class Controller
 {
+
+    public function renderView($views, $params = []){
+        return Application::$app->router->renderView($views);
+    }
     /**
      * Handle calls to missing methods on the controller.
      *
