@@ -3,7 +3,7 @@ namespace App\Helper;
 
 class TimePeriod
 {
-    public static function get($to = null, $from= null) : array{
+    public static function getRangeByMonthYear($to = null, $from= null) : array {
             $now = new \DateTime('now');
             $toMonth = $now->format('m');
             $fromMonth = $now->format('m');

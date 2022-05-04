@@ -3,7 +3,7 @@
 
 class m0001_initial extends \App\Schemas implements \App\CreateTables
 {
-    public function up(){
+    public function up() {
         $this->db->pdo->exec("CREATE TABLE users(
             id int NOT NULL AUTO_INCREMENT,
             email VARCHAR(255),

@@ -14,7 +14,7 @@ class Database
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
-    public function createMigrationTable()
+    public function createMigrationTable() : void
     {
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations(
             id int NOT NULL AUTO_INCREMENT,
@@ -35,7 +35,7 @@ class Database
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
     }
 
-    public function applyMigrations()
+    public function applyMigrations() : void
     {
         $this->createMigrationTable();
         $appliedMigrations = $this->appliedMigration();
@@ -55,7 +55,7 @@ class Database
         $this->saveMigration($toApplyMigration);
     }
 
-    public function rollBackMigrations()
+    public function rollBackMigrations() : void
     {
         $this->createMigrationTable();
         $appliedMigrations = $this->appliedMigration('desc');
@@ -72,14 +72,15 @@ class Database
         $this->removeMigration();
     }
 
-    public function removeMigration()
+    public function removeMigration() :void
     {
         $stats = $this->pdo->prepare("DROP TABLE migrations");
         $stats->execute();
     }
 
-    public function saveMigration(array $migrations)
+    public function saveMigration(array $migrations) : void
     {
+
         $migrations = implode(',', array_map(fn($m) => "('$m')", $migrations));
         $stats = $this->pdo->prepare("INSERT INTO migrations(migration) VALUES $migrations");
         $stats->execute();

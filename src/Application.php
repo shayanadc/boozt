@@ -19,15 +19,41 @@ class Application
     {
         self::$ROOT_DIR = $rootDir;
         self::$app = $this;
-        $this->request = new Request();
-        $this->router = new Router($this->request);
-        $this->db = new Database(getenv("DB_HOST"), getenv("DB_PORT"), getenv("DB_NAME"), getenv("DB_USER"), getenv("DB_PASS"));
+        $this->loadConfig();
+
+        $this->loadModules();
     }
 
-    public function run(){
+    public function loadConfig(): void
+    {
+        (new \App\EnvConfig(self::$ROOT_DIR . '/.env'))->load();
+    }
+
+    public function bootHttpRouting() : void
+    {
+
+        $this->router = new Router($this->request);
+    }
+
+    public function getModules(): array
+    {
+        return require __DIR__ . '/Modules.php';
+    }
+
+    public function loadModules() : void
+    {
+
+        foreach ($this->getModules() as $key => $module) {
+            $this->{$key} = $module;
+        }
+
+    }
+
+    public function run(): mixed
+    {
         try {
             return $this->router->resolve();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return Response::json(['message' => 'not found'], 404);
         }
     }
