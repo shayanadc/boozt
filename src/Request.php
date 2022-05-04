@@ -4,8 +4,15 @@
 namespace App;
 
 
+/**
+ * Class Request
+ * @package App
+ */
 class Request
 {
+    /**
+     * @return string
+     */
     public function path() :string
     {
 
@@ -20,6 +27,10 @@ class Request
         return substr($path, 0, $position);
 
     }
+
+    /**
+     * @return string
+     */
     public function method(): string
     {
 
@@ -27,6 +38,9 @@ class Request
     }
 
 
+    /**
+     * @return array
+     */
     public function getQuery(): array {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
 

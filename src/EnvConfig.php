@@ -4,10 +4,21 @@
 namespace App;
 
 
+/**
+ * Class EnvConfig
+ * @package App
+ */
 class EnvConfig
 {
+    /**
+     * @var string
+     */
     public string $path;
 
+    /**
+     * EnvConfig constructor.
+     * @param string $path
+     */
     public function __construct(string $path)
     {
         if(!file_exists($path)) {
@@ -16,6 +27,9 @@ class EnvConfig
         $this->path = $path;
     }
 
+    /**
+     *
+     */
     public function load() :void
     {
         if (!is_readable($this->path)) {

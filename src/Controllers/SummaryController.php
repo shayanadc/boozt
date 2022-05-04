@@ -8,9 +8,17 @@ use App\Request;
 use App\Response;
 use App\Services\SummaryService;
 
+/**
+ * Class SummaryController
+ * @package App\Controllers
+ */
 class SummaryController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return false|string
+     */
     public function index(Request $request)
     {
         $filters = $request->getQuery();

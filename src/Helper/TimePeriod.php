@@ -1,8 +1,18 @@
 <?php
 namespace App\Helper;
 
+/**
+ * Class TimePeriod
+ * @package App\Helper
+ */
 class TimePeriod
 {
+    /**
+     * @param null $to
+     * @param null $from
+     * @return array[]
+     * @throws \Exception
+     */
     public static function getRangeByMonthYear($to = null, $from= null) : array {
             $now = new \DateTime('now');
             $toMonth = $now->format('m');

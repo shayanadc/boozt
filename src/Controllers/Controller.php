@@ -2,11 +2,19 @@
 namespace App\Controllers;
 
 use App\Application;
-use App\Response;
 
+/**
+ * Class Controller
+ * @package App\Controllers
+ */
 abstract class Controller
 {
 
+    /**
+     * @param $views
+     * @param array $params
+     * @return false|string
+     */
     public function renderView($views, $params = []){
         return Application::$app->router->renderView($views);
     }

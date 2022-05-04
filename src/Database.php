@@ -4,16 +4,34 @@
 namespace App;
 
 
+/**
+ * Class Database
+ * @package App
+ */
 class Database
 {
+    /**
+     * @var \PDO
+     */
     public \PDO $pdo;
 
+    /**
+     * Database constructor.
+     * @param $host
+     * @param $port
+     * @param $db
+     * @param $user
+     * @param $password
+     */
     public function __construct($host, $port, $db, $user, $password)
     {
         $this->pdo = new \PDO("mysql:host=$host;port=$port;dbname=$db", $user, $password);
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
+    /**
+     *
+     */
     public function createMigrationTable() : void
     {
         $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations(
@@ -26,6 +44,10 @@ class Database
         );
     }
 
+    /**
+     * @param string $order
+     * @return array
+     */
     public function appliedMigration($order = 'asc')
     {
         $sql = 'SELECT migration from migrations order by id ' . $order;
@@ -35,6 +57,9 @@ class Database
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
     }
 
+    /**
+     *
+     */
     public function applyMigrations() : void
     {
         $this->createMigrationTable();
@@ -55,6 +80,9 @@ class Database
         $this->saveMigration($toApplyMigration);
     }
 
+    /**
+     *
+     */
     public function rollBackMigrations() : void
     {
         $this->createMigrationTable();
@@ -72,12 +100,18 @@ class Database
         $this->removeMigration();
     }
 
+    /**
+     *
+     */
     public function removeMigration() :void
     {
         $stats = $this->pdo->prepare("DROP TABLE migrations");
         $stats->execute();
     }
 
+    /**
+     * @param array $migrations
+     */
     public function saveMigration(array $migrations) : void
     {
 

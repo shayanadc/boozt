@@ -5,8 +5,13 @@ use App\Model\Item;
 use App\Model\Order;
 use App\Model\User;
 
+/**
+ * Class Seeders
+ * @package App
+ */
 class Seeders
 {
+
     public static function run(){
         $user = Fixture::create( User::class,['email' => 'mail@mail.com', 'first_name' => 'shayan', 'last_name' => 'hh']);
         $order1 = Fixture::create(Order::class, ['purchase_date' => '2022-03-03 12:30:10', 'country'=> 'sweden', 'device' => 'mac', 'user_id' => $user->id]);

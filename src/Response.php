@@ -4,8 +4,17 @@
 namespace App;
 
 
+/**
+ * Class Response
+ * @package App
+ */
 class Response
 {
+    /**
+     * @param $array
+     * @param int $status
+     * @return false|string
+     */
     public static function json($array, $status = 200){
         if(getenv('APP') !== 'test'){
             header('Content-Type: application/json; charset=utf-8');

@@ -6,15 +6,29 @@ namespace App\Model;
 
 use App\Application;
 
+/**
+ * Class Model
+ * @package App\Model
+ */
 abstract class Model
 {
+    /**
+     * @var \PDO
+     */
     public \PDO $pdo;
+
+    /**
+     * Model constructor.
+     */
     public function __construct()
     {
         $this->pdo = Application::$app->db->pdo;
 
     }
 
+    /**
+     * @return $this
+     */
     public function save(){
         $table = $this->table;
         $attributes = $this->attributes();
