@@ -11,9 +11,10 @@ The fron end project is implemented with Reactjs
 
 # Installation and Running using docker
 
-Navigate to the project root directory and run docker-compose up -d --build
-Install dependencies - docker-compose exec app composer install
-Run migrations - docker-compose exec app php migrations.php
-Run migrations - docker-compose exec app php seeder.php
+1. Navigate to the project root directory and run docker-compose up -d --build
+2. Install dependencies - docker-compose exec app composer install
+3. Run migrations - docker-compose exec app php migrations.php
+4. Run migrations - docker-compose exec app php seeder.php
+
 Open the project front-end in browser http://127.0.0.1:3000
 Open the project backend-end in browser http://127.0.0.1:8082
